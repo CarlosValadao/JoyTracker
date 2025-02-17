@@ -207,5 +207,5 @@ void oledgfx_clear_hline(ssd1306_t *ssd, uint8_t x, uint8_t thickness)
  */
 void oledgfx_render(ssd1306_t *ssd)
 {
-    return; // TODO: Implementar renderização do buffer
+    ssd1306_send_data(ssd);
 }
