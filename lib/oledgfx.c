@@ -85,6 +85,28 @@ void oledgfx_clear_screen(ssd1306_t *ssd)
 }
 
 /**
+ * @brief Desenha ou apaga o cursor no display SSD1306.
+ *
+ * O cursor é representado por um quadrado de 8x8 pixels. 
+ * Ele pode ser desenhado (state = 1) ou apagado (state = 0).
+ *
+ * @param ssd Ponteiro para a estrutura do display SSD1306.
+ * @param x Coordenada X do canto superior esquerdo do cursor.
+ * @param y Coordenada Y do canto superior esquerdo do cursor.
+ * @param state Estado do cursor (1 = desenha, 0 = apaga).
+ */
+static void oledgfx_toggle_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y, uint8_t state)
+{
+    for (uint8_t i = 0; i < 8; ++i)
+    {
+        for (uint8_t j = 0; j < 8; ++j)
+        {
+            ssd1306_pixel(ssd, x + i, y + j, state);
+        }
+    }
+}
+
+/**
  * @brief Desenha o cursor na posição especificada.
  *
  * O cursor é representado por um quadrado de 8x8 pixels na coordenada (x, y).
@@ -97,13 +119,7 @@ void oledgfx_clear_screen(ssd1306_t *ssd)
  */
 void oledgfx_draw_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y)
 {
-    for (uint8_t i = 0; i < 8; ++i)
-    {
-        for (uint8_t j = 0; j < 8; ++j)
-        {
-            ssd1306_pixel(ssd, x + i, y + j, 1);
-        }
-    }
+    oledgfx_toggle_cursor(ssd, x, y, 1);
 }
 
 /**
@@ -120,7 +136,8 @@ void oledgfx_draw_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y)
  */
 void oledgfx_update_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y)
 {
-    return; // TODO: Implementar atualização do cursor
+    oledgfx_toggle_cursor(ssd, last_cursor_x, last_cursor_y, 0);
+    oledgfx_toggle_cursor(ssd, x, y, 1);
 }
 
 /**
