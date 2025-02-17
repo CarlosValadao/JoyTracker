@@ -60,7 +60,14 @@ volatile int8_t last_cursor_y = INVALID_CURSOR;
  */
 void oledgfx_init_all(ssd1306_t *ssd, i2c_inst_t *i2c, uint baudrate, uint8_t sda, uint8_t scl, uint8_t address)
 {
-    return; // TODO: Implementar inicialização do display OLED
+    i2c_init(i2c, baudrate); // Inicializa a comunicação I2C com a taxa especificada
+    gpio_set_function(sda, GPIO_FUNC_I2C); // Define os pinos SDA e SCL para função I2C
+    gpio_set_function(scl, GPIO_FUNC_I2C);
+    gpio_pull_up(sda); // Habilita pull-up nos pinos I2C
+    gpio_pull_up(scl);
+    ssd1306_init(ssd, WIDTH, HEIGHT, false, address, i2c); // Inicializa o display SSD1306
+    ssd1306_config(ssd); // Configura o display
+    ssd1306_send_data(ssd); // Atualiza o display
 }
 
 /**
