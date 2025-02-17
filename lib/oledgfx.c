@@ -1,0 +1,181 @@
+#include "oledgfx.h"
+
+/**
+ * @file oledgfx.c
+ * @brief Implementação das funções para renderização gráfica no display OLED SSD1306.
+ *
+ * Este arquivo contém as funções para inicialização, desenho e manipulação de gráficos
+ * no display OLED controlado pelo driver SSD1306. Ele inclui funcionalidades para desenhar
+ * linhas, mover o cursor e renderizar elementos gráficos na tela.
+ *
+ * O cursor é representado por um quadrado de 8x8 pixels, cuja posição pode ser
+ * atualizada dinamicamente na tela.
+ *
+ * @author Carlos Valadão
+ * @date 2025-02-16
+ * @version 1.0
+ * @license GNU General Public License v3.0 (GPLv3)
+ * 
+ * @copyright
+ * Copyright (C) 2025 Carlos Valadão
+ *
+ * Este programa é software livre: você pode redistribuí-lo e/ou modificá-lo 
+ * sob os termos da Licença Pública Geral GNU, conforme publicada pela 
+ * Free Software Foundation, na versão 3 da licença, ou (a seu critério) 
+ * qualquer versão posterior.
+ *
+ * Este programa é distribuído na esperança de que seja útil, 
+ * mas SEM QUALQUER GARANTIA; sem mesmo a garantia implícita de 
+ * COMERCIALIZAÇÃO ou ADEQUAÇÃO A UM DETERMINADO FIM. 
+ * Consulte a Licença Pública Geral GNU para mais detalhes.
+ *
+ * Você deve ter recebido uma cópia da Licença Pública Geral GNU 
+ * junto com este programa. Se não, veja <https://www.gnu.org/licenses/>.
+ */
+
+
+/**
+ * @brief Última posição X do cursor no display OLED.
+ */
+volatile int8_t last_cursor_x = INVALID_CURSOR;
+
+/**
+ * @brief Última posição Y do cursor no display OLED.
+ */
+volatile int8_t last_cursor_y = INVALID_CURSOR;
+
+/**
+ * @brief Inicializa o display OLED SSD1306.
+ *
+ * Configura o barramento I2C e inicializa o driver SSD1306 para exibição gráfica.
+ *
+ * @todo Implementar a configuração do I2C e a inicialização do display OLED.
+ *
+ * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
+ * @param[in] i2c Ponteiro para a instância do barramento I2C.
+ * @param[in] baudrate Taxa de comunicação I2C.
+ * @param[in] sda Pino GPIO utilizado para SDA.
+ * @param[in] scl Pino GPIO utilizado para SCL.
+ * @param[in] address Endereço I2C do display OLED.
+ */
+void oledgfx_init_all(ssd1306_t *ssd, i2c_inst_t *i2c, uint baudrate, uint8_t sda, uint8_t scl, uint8_t address)
+{
+    return; // TODO: Implementar inicialização do display OLED
+}
+
+/**
+ * @brief Limpa a tela do display OLED.
+ *
+ * Preenche o display inteiro com cor preta (desligando todos os pixels).
+ *
+ * @todo Implementar o comando para limpar a tela do SSD1306.
+ *
+ * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
+ */
+void oledgfx_clear_screen(ssd1306_t *ssd)
+{
+    return; // TODO: Implementar função de limpeza da tela
+}
+
+/**
+ * @brief Desenha o cursor na posição especificada.
+ *
+ * O cursor é representado por um quadrado de 8x8 pixels na coordenada (x, y).
+ *
+ * @todo Implementar o desenho do cursor no display OLED.
+ *
+ * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
+ * @param[in] x Posição X do cursor.
+ * @param[in] y Posição Y do cursor.
+ */
+void oledgfx_draw_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y)
+{
+    return; // TODO: Implementar desenho do cursor
+}
+
+/**
+ * @brief Atualiza a posição do cursor no display.
+ *
+ * Apaga a posição anterior do cursor e desenha a nova posição.
+ * O cursor é representado por um quadrado de 8x8 pixels.
+ *
+ * @todo Implementar atualização do cursor para evitar rastros.
+ *
+ * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
+ * @param[in] x Nova posição X do cursor.
+ * @param[in] y Nova posição Y do cursor.
+ */
+void oledgfx_update_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y)
+{
+    return; // TODO: Implementar atualização do cursor
+}
+
+/**
+ * @brief Desenha uma linha vertical na tela.
+ *
+ * @todo Implementar função para desenhar uma linha vertical no SSD1306.
+ *
+ * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
+ * @param[in] y Posição Y inicial da linha.
+ * @param[in] thickness Espessura da linha.
+ */
+void oledgfx_draw_vline(ssd1306_t *ssd, uint8_t y, uint8_t thickness)
+{
+    return; // TODO: Implementar desenho de linha vertical
+}
+
+/**
+ * @brief Desenha uma linha horizontal na tela.
+ *
+ * @todo Implementar função para desenhar uma linha horizontal no SSD1306.
+ *
+ * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
+ * @param[in] x Posição X inicial da linha.
+ * @param[in] thickness Espessura da linha.
+ */
+void oledgfx_draw_hline(ssd1306_t *ssd, uint8_t x, uint8_t thickness)
+{
+    return; // TODO: Implementar desenho de linha horizontal
+}
+
+/**
+ * @brief Apaga uma linha vertical previamente desenhada.
+ *
+ * @todo Implementar função para apagar uma linha vertical no SSD1306.
+ *
+ * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
+ * @param[in] y Posição Y da linha a ser apagada.
+ * @param[in] thickness Espessura da linha.
+ */
+void oledgfx_clear_vline(ssd1306_t *ssd, uint8_t y, uint8_t thickness)
+{
+    return; // TODO: Implementar apagamento de linha vertical
+}
+
+/**
+ * @brief Apaga uma linha horizontal previamente desenhada.
+ *
+ * @todo Implementar função para apagar uma linha horizontal no SSD1306.
+ *
+ * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
+ * @param[in] x Posição X da linha a ser apagada.
+ * @param[in] thickness Espessura da linha.
+ */
+void oledgfx_clear_hline(ssd1306_t *ssd, uint8_t x, uint8_t thickness)
+{
+    return; // TODO: Implementar apagamento de linha horizontal
+}
+
+/**
+ * @brief Atualiza a renderização do display OLED.
+ *
+ * Envia os dados em buffer para o display físico, aplicando todas as alterações gráficas feitas anteriormente.
+ *
+ * @todo Implementar envio do buffer para o display SSD1306.
+ *
+ * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
+ */
+void oledgfx_render(ssd1306_t *ssd)
+{
+    return; // TODO: Implementar renderização do buffer
+}
