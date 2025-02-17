@@ -162,7 +162,7 @@ bool joystick_is_moving(const joystick_t *joy)
  */
 void joystick_set_deadzone(joystick_t *joy, uint8_t deadzone_value)
 {
-    return; // TODO: Implementar configuração da deadzone
+    joy->deadzone = deadzone_value;
 }
 
 /** @} */ // Fim do grupo "Joystick"
