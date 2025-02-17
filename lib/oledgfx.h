@@ -103,19 +103,19 @@ void oledgfx_update_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y);
  * @brief Desenha uma linha vertical na tela.
  *
  * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
- * @param[in] y Posição Y inicial da linha.
+ * @param[in] x Posição X inicial da linha.
  * @param[in] thickness Espessura da linha.
  */
-void oledgfx_draw_vline(ssd1306_t *ssd, uint8_t y, uint8_t thickness);
+void oledgfx_draw_vline(ssd1306_t *ssd, uint8_t x, uint8_t thickness);
 
 /**
  * @brief Desenha uma linha horizontal na tela.
  *
  * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
- * @param[in] x Posição X inicial da linha.
+ * @param[in] y Posição Y inicial da linha.
  * @param[in] thickness Espessura da linha.
  */
-void oledgfx_draw_hline(ssd1306_t *ssd, uint8_t x, uint8_t thickness);
+void oledgfx_draw_hline(ssd1306_t *ssd, uint8_t y, uint8_t thickness);
 
 /**
  * @brief Apaga uma linha vertical previamente desenhada.

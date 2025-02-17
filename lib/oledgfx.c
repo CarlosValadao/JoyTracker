@@ -146,12 +146,20 @@ void oledgfx_update_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y)
  * @todo Implementar função para desenhar uma linha vertical no SSD1306.
  *
  * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
- * @param[in] y Posição Y inicial da linha.
- * @param[in] thickness Espessura da linha.
+ * @param[in] x Posição X inicial da linha.
+ * @param[in] thickness Espessura da linha em quantidade de pixels.
  */
-void oledgfx_draw_vline(ssd1306_t *ssd, uint8_t y, uint8_t thickness)
+void oledgfx_draw_vline(ssd1306_t *ssd, uint8_t x, uint8_t thickness)
 {
-    return; // TODO: Implementar desenho de linha vertical
+    uint8_t i, j;
+    if(x + thickness >= WIDTH) x = WIDTH - thickness;
+    for(j = x; j < x + thickness - 1; j++)
+    {
+        for(i = 0; i < HEIGHT; i++)
+        {
+            ssd1306_pixel(ssd, j, i, 1);
+        }
+    }
 }
 
 /**
@@ -160,10 +168,10 @@ void oledgfx_draw_vline(ssd1306_t *ssd, uint8_t y, uint8_t thickness)
  * @todo Implementar função para desenhar uma linha horizontal no SSD1306.
  *
  * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
- * @param[in] x Posição X inicial da linha.
- * @param[in] thickness Espessura da linha.
+ * @param[in] y Posição Y inicial da linha.
+ * @param[in] thickness Espessura da linha em quantidade de pixels.
  */
-void oledgfx_draw_hline(ssd1306_t *ssd, uint8_t x, uint8_t thickness)
+void oledgfx_draw_hline(ssd1306_t *ssd, uint8_t y, uint8_t thickness)
 {
     return; // TODO: Implementar desenho de linha horizontal
 }
@@ -175,7 +183,7 @@ void oledgfx_draw_hline(ssd1306_t *ssd, uint8_t x, uint8_t thickness)
  *
  * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
  * @param[in] y Posição Y da linha a ser apagada.
- * @param[in] thickness Espessura da linha.
+ * @param[in] thickness Espessura da linha em quantidade de pixels.
  */
 void oledgfx_clear_vline(ssd1306_t *ssd, uint8_t y, uint8_t thickness)
 {
@@ -189,7 +197,7 @@ void oledgfx_clear_vline(ssd1306_t *ssd, uint8_t y, uint8_t thickness)
  *
  * @param[out] ssd Ponteiro para a estrutura do display SSD1306.
  * @param[in] x Posição X da linha a ser apagada.
- * @param[in] thickness Espessura da linha.
+ * @param[in] thickness Espessura da linha em quantidade de pixels.
  */
 void oledgfx_clear_hline(ssd1306_t *ssd, uint8_t x, uint8_t thickness)
 {
