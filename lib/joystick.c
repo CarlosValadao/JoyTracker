@@ -109,7 +109,8 @@ uint16_t joystick_get_x(const joystick_t *joy)
  */
 uint16_t joystick_get_y(const joystick_t *joy)
 {
-    return 0; // TODO: Implementar leitura do ADC para Y
+    adc_select_input(joy->channel_y);
+    return adc_read();
 }
 
 /**
