@@ -1,5 +1,6 @@
 #include "joystick.h"
 #include "push_button.h"
+#include "hardware/adc.h"
 
 /**
  * @file joystick.c
@@ -26,6 +27,28 @@
  */
 
 /**
+ * @brief Converte um número de GPIO para o número do canal ADC correspondente.
+ *
+ * Esta função recebe um número de GPIO e retorna o número do canal ADC associado.
+ * Os GPIOs válidos para ADC são 26, 27, 28 e 29, correspondentes aos canais 0, 1, 2 e 3, respectivamente.
+ *
+ * @note Apenas os GPIOs 26 a 29 são suportados, pois são os únicos pinos com entrada ADC no RP2040.
+ * @warning Se um GPIO inválido for passado, a função pode retornar um valor indefinido.
+ *
+ * @param[in] gpio O número do pino GPIO a ser convertido.
+ * @return O número do canal ADC correspondente, ou comportamento indefinido para valores inválidos.
+ */
+static uint8_t adc_gpio_to_channel_num(uint8_t gpio) {
+    switch (gpio)
+    {
+        case ADC_GPIO_26: return ADC_CHANNEL_1;
+        case ADC_GPIO_27: return ADC_CHANNEL_2;
+        case ADC_GPIO_28: return ADC_CHANNEL_3;
+        case ADC_GPIO_29: return ADC_CHANNEL_4;
+    }
+}
+
+/**
  * @brief Inicializa o joystick configurando os pinos e a estrutura.
  *
  * Configura os pinos de entrada analógica para os eixos X e Y e o botão de push como entrada digital com pull-up ativado.
@@ -43,7 +66,16 @@
  */
 void joystick_init_all(joystick_t *joy, uint8_t joy_vrx, uint8_t joy_vry, uint8_t joy_pbutton)
 {
-    return; // TODO: Implementar inicialização
+    adc_init();
+    adc_gpio_init(joy_vrx);
+    adc_gpio_init(joy_vry);
+    pb_config(joy_pbutton, true);
+    uint8_t joy_vrx_channel = adc_gpio_to_channel_num(joy_vrx);
+    uint8_t joy_vry_channel = adc_gpio_to_channel_num(joy_vry);
+    joy->channel_x = joy_vrx_channel;
+    joy->channel_y = joy_vry_channel;
+    joy->joy_push_button = joy_pbutton;
+    joy->deadzone = (uint8_t) (21);
 }
 
 /**
