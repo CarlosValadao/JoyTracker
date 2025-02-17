@@ -92,7 +92,8 @@ void joystick_init_all(joystick_t *joy, uint8_t joy_vrx, uint8_t joy_vry, uint8_
  */
 uint16_t joystick_get_x(const joystick_t *joy)
 {
-    return 0; // TODO: Implementar leitura do ADC para X
+    adc_select_input(joy->channel_x);
+    return adc_read();
 }
 
 /**
