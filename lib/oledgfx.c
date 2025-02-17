@@ -81,7 +81,7 @@ void oledgfx_init_all(ssd1306_t *ssd, i2c_inst_t *i2c, uint baudrate, uint8_t sd
  */
 void oledgfx_clear_screen(ssd1306_t *ssd)
 {
-    return; // TODO: Implementar função de limpeza da tela
+    ssd1306_fill(ssd, 0);
 }
 
 /**
@@ -97,7 +97,13 @@ void oledgfx_clear_screen(ssd1306_t *ssd)
  */
 void oledgfx_draw_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y)
 {
-    return; // TODO: Implementar desenho do cursor
+    for (uint8_t i = 0; i < 8; ++i)
+    {
+        for (uint8_t j = 0; j < 8; ++j)
+        {
+            ssd1306_pixel(ssd, x + i, y + j, 1);
+        }
+    }
 }
 
 /**
