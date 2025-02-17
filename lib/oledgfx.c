@@ -152,8 +152,8 @@ void oledgfx_update_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y)
 void oledgfx_draw_vline(ssd1306_t *ssd, uint8_t x, uint8_t thickness)
 {
     uint8_t i, j;
-    if(x + thickness >= WIDTH) x = WIDTH - thickness;
-    for(j = x; j < x + thickness - 1; j++)
+    if(x + thickness > WIDTH) x = WIDTH - thickness;
+    for(j = x; j < x + thickness; j++)
     {
         for(i = 0; i < HEIGHT; i++)
         {
@@ -173,7 +173,15 @@ void oledgfx_draw_vline(ssd1306_t *ssd, uint8_t x, uint8_t thickness)
  */
 void oledgfx_draw_hline(ssd1306_t *ssd, uint8_t y, uint8_t thickness)
 {
-    return; // TODO: Implementar desenho de linha horizontal
+    uint8_t i, j;
+    if(y + thickness > HEIGHT) y = HEIGHT - thickness;
+    for(j = y; j < y + thickness; j++)
+    {
+        for(i = 0; i < WIDTH; i++)
+        {
+            ssd1306_pixel(ssd, i, j, 1);
+        }
+    }
 }
 
 /**
