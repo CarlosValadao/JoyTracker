@@ -31,30 +31,39 @@ static uint16_t calculate_led_intensity_value(uint8_t intensity)
  * 
  * @param pins Ponteiro para a estrutura contendo os pinos GPIO dos LEDs.
  */
-void rgb_init(const rgb_t *pins)
+void rgb_init_all(rgb_t *rgb, uint8_t red, uint8_t green, uint8_t blue, float clkdiv, uint16_t wrap)
 {
     uint slice_r, slice_g, slice_b;
     
     // Configura os pinos dos LEDs como pinos PWM
-    gpio_set_function(pins->red, GPIO_FUNC_PWM);
-    gpio_set_function(pins->green, GPIO_FUNC_PWM);
-    gpio_set_function(pins->blue, GPIO_FUNC_PWM);
+    gpio_set_function(red, GPIO_FUNC_PWM);
+    gpio_set_function(green, GPIO_FUNC_PWM);
+    gpio_set_function(blue, GPIO_FUNC_PWM);
 
     // Obtém o número do "slice" para cada pino
-    slice_r = pwm_gpio_to_slice_num(pins->red);
-    slice_g = pwm_gpio_to_slice_num(pins->green);
-    slice_b = pwm_gpio_to_slice_num(pins->blue);
+    slice_r = pwm_gpio_to_slice_num(red);
+    slice_g = pwm_gpio_to_slice_num(green);
+    slice_b = pwm_gpio_to_slice_num(blue);
 
-    // Configura o PWM com a configuração padrão
-    pwm_config config = pwm_get_default_config();
+    pwm_set_clkdiv(slice_r, clkdiv);
+    pwm_set_clkdiv(slice_g, clkdiv);
+    pwm_set_clkdiv(slice_b, clkdiv);
     
-    // Define o divisor de clock para a PWM, ajustando a frequência do PWM
-    pwm_config_set_clkdiv(&config, 4.f);
-    
-    // Inicializa os canais PWM para cada cor (RGB)
-    pwm_init(slice_r, &config, true);
-    pwm_init(slice_g, &config, true);
-    pwm_init(slice_b, &config, true);
+    pwm_set_wrap(slice_r, wrap);
+    pwm_set_wrap(slice_g, wrap);
+    pwm_set_wrap(slice_b, wrap);
+
+    pwm_set_gpio_level(red, 0);
+    pwm_set_gpio_level(green, 0);
+    pwm_set_gpio_level(blue, 0);
+
+    pwm_set_enabled(slice_r, true);
+    pwm_set_enabled(slice_g, true);
+    pwm_set_enabled(slice_b, true);
+
+    rgb->red = red;
+    rgb->green = green;
+    rgb->blue = blue;
 }
 
 /** 

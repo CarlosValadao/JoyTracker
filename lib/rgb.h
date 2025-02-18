@@ -40,7 +40,7 @@ typedef struct
  * 
  * @param pins Estrutura contendo os pinos dos LEDs RGB.
  */
-void rgb_init(const rgb_t *pins);
+void rgb_init_all(rgb_t *rgb, uint8_t red, uint8_t green, uint8_t blue, float clkdiv, uint16_t wrap);
 
 
 /**
