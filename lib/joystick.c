@@ -78,6 +78,18 @@ void joystick_init_all(joystick_t *joy, uint8_t joy_vrx, uint8_t joy_vry, uint8_
     joy->deadzone = (uint8_t) (21);
 }
 
+static uint16_t joystick_read_filtered(uint8_t channel, uint8_t deadzone)
+{
+    adc_select_input(channel);
+    uint16_t raw_value = adc_read(); // Leitura do ADC
+    uint16_t center = 2048; // Centro do joystick em um ADC de 12 bits
+    // Se estiver dentro da deadzone, retorna o centro para evitar ruído
+    if (raw_value > (center - deadzone) && raw_value < (center + deadzone))
+    {
+        return center;
+    }
+}
+
 /**
  * @brief Obtém o valor do eixo X do joystick.
  *
@@ -92,8 +104,7 @@ void joystick_init_all(joystick_t *joy, uint8_t joy_vrx, uint8_t joy_vry, uint8_
  */
 uint16_t joystick_get_x(const joystick_t *joy)
 {
-    adc_select_input(joy->channel_x);
-    return adc_read();
+    return joystick_read_filtered(joy->channel_x, joy->deadzone);
 }
 
 /**
@@ -109,8 +120,7 @@ uint16_t joystick_get_x(const joystick_t *joy)
  */
 uint16_t joystick_get_y(const joystick_t *joy)
 {
-    adc_select_input(joy->channel_y);
-    return adc_read();
+    return joystick_read_filtered(joy->channel_y, joy->deadzone);
 }
 
 /**
