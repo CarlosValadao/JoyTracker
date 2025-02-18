@@ -225,3 +225,32 @@ void oledgfx_render(ssd1306_t *ssd)
 {
     ssd1306_send_data(ssd);
 }
+
+/**
+ * @brief Desenha uma borda com espessura ajustável no display OLED SSD1306.
+ *
+ * Esta função desenha uma borda ao redor da tela OLED, onde o usuário pode definir 
+ * apenas a espessura da borda, mas não suas dimensões. A borda se estende para dentro 
+ * da tela conforme o valor de `thickness`.
+ *
+ * @details A função desenha quatro segmentos de linha para formar a borda da tela: 
+ * uma linha superior, uma inferior, uma esquerda e uma direita. A espessura da borda 
+ * é aplicada uniformemente em todas as direções, começando das extremidades e avançando 
+ * para o centro da tela.
+ *
+ * @note A espessura máxima recomendada depende da resolução do display (128x64 pixels) 
+ * e deve ser escolhida de forma que não comprometa a área útil da tela.
+ *
+ * @warning Se `thickness` for muito alto, pode cobrir completamente a tela, tornando 
+ * o conteúdo ilegível.
+ *
+ * @param[in,out] ssd Ponteiro para a estrutura do display SSD1306.
+ * @param[in] thickness Espessura da borda em pixels.
+ */
+void oledgfx_draw_border(ssd1306_t *ssd, uint8_t thickness)
+{
+    oledgfx_draw_vline(ssd, 0, thickness);
+    oledgfx_draw_vline(ssd, WIDTH, thickness);
+    oledgfx_draw_hline(ssd, 0, thickness);
+    oledgfx_draw_hline(ssd, HEIGHT, thickness);
+}
