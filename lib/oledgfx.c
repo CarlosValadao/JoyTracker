@@ -120,6 +120,8 @@ static void oledgfx_toggle_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y, uint8_t 
 void oledgfx_draw_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y)
 {
     oledgfx_toggle_cursor(ssd, x, y, 1);
+    last_cursor_x = x;
+    last_cursor_y = y;
 }
 
 /**
@@ -138,6 +140,8 @@ void oledgfx_update_cursor(ssd1306_t *ssd, uint8_t x, uint8_t y)
 {
     oledgfx_toggle_cursor(ssd, last_cursor_x, last_cursor_y, 0);
     oledgfx_toggle_cursor(ssd, x, y, 1);
+    last_cursor_x = x;
+    last_cursor_y = y;
 }
 
 /**
