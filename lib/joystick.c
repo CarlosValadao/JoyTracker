@@ -75,7 +75,7 @@ void joystick_init_all(joystick_t *joy, uint8_t joy_vrx, uint8_t joy_vry, uint8_
     joy->channel_x = joy_vrx_channel;
     joy->channel_y = joy_vry_channel;
     joy->joy_push_button = joy_pbutton;
-    joy->deadzone = (uint8_t) (21);
+    joy->deadzone = (uint8_t) (120);
 }
 
 static uint16_t joystick_read_filtered(uint8_t channel, uint8_t deadzone)
@@ -88,6 +88,7 @@ static uint16_t joystick_read_filtered(uint8_t channel, uint8_t deadzone)
     {
         return center;
     }
+    return raw_value;
 }
 
 /**

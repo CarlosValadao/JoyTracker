@@ -44,7 +44,9 @@
  */
 #define INVALID_CURSOR ((int8_t) (-1))
 
-#define CURSOR_SIDE = ((uint8_t) 8)
+#define CURSOR_SIDE 8
+#define BORDER_THICK 3
+#define BORDER_LIGHT 1
 
 /** 
  * @brief Última posição X do cursor no display OLED.

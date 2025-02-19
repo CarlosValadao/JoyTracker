@@ -77,8 +77,8 @@ void rgb_init_all(rgb_t *rgb, uint8_t red, uint8_t green, uint8_t blue, float cl
  */
 void rgb_turn_on_red(const rgb_t *pins, uint8_t intensity)
 {
-    uint16_t led_intensity = calculate_led_intensity_value(intensity); // Calcula a intensidade do LED
-    pwm_set_gpio_level(pins->red, led_intensity); // Acende o LED vermelho com a intensidade calculada
+    //uint16_t led_intensity = calculate_led_intensity_value(intensity); // Calcula a intensidade do LED
+    pwm_set_gpio_level(pins->red, intensity); // Acende o LED vermelho com a intensidade calculada
 }
 
 /** 
@@ -104,8 +104,8 @@ void rgb_turn_off_red(const rgb_t *pins)
  */
 void rgb_turn_on_green(const rgb_t *pins, uint8_t intensity)
 {
-    uint16_t led_intensity = calculate_led_intensity_value(intensity); // Calcula a intensidade do LED
-    pwm_set_gpio_level(pins->green, led_intensity); // Acende o LED verde com a intensidade calculada
+    //uint16_t led_intensity = calculate_led_intensity_value(intensity); // Calcula a intensidade do LED
+    pwm_set_gpio_level(pins->green, intensity); // Acende o LED verde com a intensidade calculada
 }
 
 /** 
@@ -131,8 +131,8 @@ void rgb_turn_off_green(const rgb_t *pins)
  */
 void rgb_turn_on_blue(const rgb_t *pins, uint8_t intensity)
 {
-    uint16_t led_intensity = calculate_led_intensity_value(intensity); // Calcula a intensidade do LED
-    gpio_put(pins->blue, 1); // Acende o LED azul
+    //uint16_t led_intensity = calculate_led_intensity_value(intensity); // Calcula a intensidade do LED
+    pwm_set_gpio_level(pins->blue, intensity); // Acende o LED azul
 }
 
 /** 
