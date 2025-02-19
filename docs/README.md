@@ -1,4 +1,4 @@
-# 🕹️ JoyTracker
+# 🕹️ JoyTracker [Vídeo de apresentação](https://youtu.be/eBpZh8DzSAs)
 
 JoyTracker é um programa desenvolvido em **C11** para a placa **BitDogLab**, que mapeia o movimento de um **joystick** e exibe sua posição em um **display OLED SSD1306 (128x64)**, além de controlar **LEDs RGB** com base nos valores do joystick e dos botões físicos.
 
