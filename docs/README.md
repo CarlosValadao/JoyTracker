@@ -100,6 +100,8 @@ Certifique-se de ter instalado:
 
 Após a compilação, conecte sua **Raspberry Pi Pico** ao computador em **modo bootloader**, e copie o arquivo `.uf2` gerado para o dispositivo correspondente.
 
+https://github.com/user-attachments/assets/557d189e-0391-4ea1-b65d-bb1ed9e716dc
+
 <a id="estrutura-do-projeto"></a>
 ## 📜 Estrutura do Projeto
 
